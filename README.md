@@ -63,10 +63,13 @@ BakeryMSS/
 │   └── README.md
 │
 └── README.md
-Environment Variables
+```
 
-Create a .env file inside the backend folder and add:
+## Environment Variables
 
+Create a `.env` file inside the `backend` folder and add:
+
+```env
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/BakeryMS
 JWT_SECRET=your_jwt_secret_here
@@ -76,59 +79,79 @@ EMAIL_PASS=your_email_app_password_here
 
 RAZORPAY_KEY_ID=your_razorpay_key_id_here
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret_here
+```
 
-Installation and Setup
+## Installation and Setup
 
-1. Clone the repository
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/Adnan1478/bakery_ms_mean.git
 cd bakery_ms_mean
+```
 
-2. Backend setup
+### 2. Backend Setup
 
+```bash
 cd backend
 npm install
 npm run dev
+```
 
 The backend will run on:
 
+```txt
 http://localhost:5000
-3. Frontend setup
+```
+
+### 3. Frontend Setup
 
 Open a new terminal:
 
+```bash
 cd frontend
 npm install
 ng serve
+```
 
 The frontend will run on:
 
+```txt
 http://localhost:4200
+```
 
-API Modules
+## API Modules
 
-Authentication API
-Product API
-Category API
-Order API
-User API
-Review API
-Recipe API
-Dashboard API
-Payment API
-Screenshots
+- Authentication API
+- Product API
+- Category API
+- Order API
+- User API
+- Review API
+- Recipe API
+- Dashboard API
+- Payment API
 
-Add your project screenshots here:
+## Screenshots
 
-![Home Page](screenshots/home.png)
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9119a92b-cac1-4dbe-b2d9-f8422d39598a" />
+### Home Page
 
-![Admin Dashboard](screenshots/admin-dashboard.png)
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/02386fca-d04a-4175-95d7-4268d9d9484f" />
+<img width="100%" alt="Home Page" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
 
-![Product Page](screenshots/products.png)
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/632e3580-16af-4c9b-837f-3f2aa953706c" />
+### Admin Dashboard
 
-Author
-Adnan Mansuri
+<img width="100%" alt="Admin Dashboard" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
 
-GitHub: Adnan1478
+### Product Page
+
+<img width="100%" alt="Product Page" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
+
+## Author
+
+**Adnan Mansuri**
+
+GitHub: [Adnan1478](https://github.com/Adnan1478)
+
+## License
+
+This project is created for academic and learning purposes.
