@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+
+<!-- Global Cart Abandonment Toast -->
+<div class="cart-toast" [class.show]="showNotification">
+  <div class="toast-content">
+    <div class="toast-icon">🛍️</div>
+    <div class="toast-text">{{ notificationMessage }}</div>
+    <button class="toast-close" (click)="closeNotification()">&times;</button>
+  </div>
+</div>

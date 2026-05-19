@@ -1,0 +1,68 @@
+<div class="home-page">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title fade-in-up">Freshly Baked,<br>Made with <span class="text-accent">Love</span></h1>
+            <p class="hero-subtitle fade-in-up delay-1">Discover the finest artisan breads, pastries, and cakes
+                delivered to your doorstep.</p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a routerLink="/menu" class="btn btn-primary btn-lg">Order Now</a>
+                <a routerLink="/about" class="btn btn-outline btn-lg text-white border-white">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features">
+        <div class="container features-grid">
+            <div class="feature-card">
+                <div class="icon">🌾</div>
+                <h3>Organic Ingredients</h3>
+                <p>We source only the finest organic flours and ingredients.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🥖</div>
+                <h3>Artisan & Fresh</h3>
+                <p>Baked fresh every single morning by our master bakers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🚚</div>
+                <h3>Fast Delivery</h3>
+                <p>Warm and fresh delivery right to your home in 30 mins.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Products Preview -->
+    <section class="section popular">
+        <div class="container">
+            <div class="section-header">
+                <h2>Customer Favorites</h2>
+                <a routerLink="/menu" class="view-all">View Full Menu &rarr;</a>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card card" *ngFor="let product of customerFavorites">
+                    <div class="product-image"
+                        [style.backgroundImage]="'url(http://localhost:5000' + product.image + ')'">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-tag">{{ product.category?.name || 'Bakery' }}</span>
+                        <h4>{{ product.name }}</h4>
+                        <!-- Truncate description if needed, or just remove if not in design -->
+                        <!-- <p>{{ product.description }}</p> -->
+                        <p class="price">₹{{ product.price }}</p>
+                        <button class="btn btn-primary btn-sm btn-full" (click)="addToCart(product)">Add to
+                            Cart</button>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div *ngIf="loading" class="loading-spinner">
+                    Loading favorites...
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

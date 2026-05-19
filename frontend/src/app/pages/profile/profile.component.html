@@ -1,0 +1,173 @@
+<div class="profile-container fade-in-up">
+    <div class="container py-5 profile-content">
+        <div class="row g-5">
+
+            <!-- Sidebar: Profile Overview -->
+            <div class="col-lg-4" style="margin-bottom: 20px;">
+                <div class="card-clean h-100">
+                    <div class="profile-cover"></div>
+                    <div class="card-body text-center pt-0 px-4 pb-5">
+                        <div class="profile-avatar-wrapper mb-4">
+                            <img [src]="imagePreview || 'https://ui-avatars.com/api/?name=' + (currentUser?.name || 'User') + '&background=random&size=128'"
+                                alt="Profile" class="profile-avatar">
+                            <label for="fileInput" class="profile-upload-btn" title="Change Photo">
+                                <span class="icon-anim camera-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                        </path>
+                                        <circle cx="12" cy="13" r="4"></circle>
+                                    </svg>
+                                </span>
+                            </label>
+                            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+                        </div>
+
+                        <h3 class="profile-name mb-2">{{ currentUser?.name }}</h3>
+                        <p class="profile-email mb-3">{{ currentUser?.email }}</p>
+                        <span class="role-badge mb-4 d-inline-block">{{ currentUser?.role }}</span>
+
+                        <div class="mt-5 pt-4 border-top">
+                            <div class="mt-5 pt-4 border-top member-since">
+                                <div class="label">Member Since</div>
+                                <div class="value">
+                                    {{ currentUser?.createdAt | date:'mediumDate' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content: Edit Form -->
+            <div class="col-lg-8">
+                <div class="card-clean p-5" style="padding: 10px;">
+                    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+                        <!-- Personal Details -->
+                        <div class="mb-5">
+                            <h4 class="section-title mb-4">
+                                <span class="icon-anim user-icon me-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </span>
+                                Personal Details
+                            </h4>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label-clean">Full Name</label>
+                                    <input type="text" class="form-control-clean" formControlName="name">
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Email Address</label>
+                                    <input type="email" class="form-control-clean" formControlName="email" readonly>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Phone Number</label>
+                                    <input type="tel" class="form-control-clean" formControlName="phone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-5" style="margin-top: 15px;">
+                            <h4 class="section-title mb-4">
+                                <span class="icon-anim pin-icon me-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </span>
+                                Address Information
+                            </h4>
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <label class="form-label-clean">Country/Region</label>
+                                    <select class="form-control-clean" formControlName="country">
+                                        <option value="India">India</option>
+                                    </select>
+                                </div>
+                                <div class="col-12" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Flat, House no., Building, Company,
+                                        Apartment</label>
+                                    <input type="text" class="form-control-clean" formControlName="house">
+                                </div>
+                                <div class="col-12" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Area, Street, Sector, Village</label>
+                                    <input type="text" class="form-control-clean" formControlName="area">
+                                </div>
+                                <div class="col-12" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Landmark</label>
+                                    <input type="text" class="form-control-clean"
+                                        placeholder="E.g. near apollo hospital" formControlName="landmark">
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Town/City</label>
+                                    <input type="text" class="form-control-clean" formControlName="city">
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">State</label>
+                                    <select class="form-control-clean" formControlName="state">
+                                        <option value="">Choose a state</option>
+                                        <option value="GUJARAT">GUJARAT</option>
+                                        <option value="MAHARASHTRA">MAHARASHTRA</option>
+                                        <option value="RAJASTHAN">RAJASTHAN</option>
+                                        <option value="DELHI">DELHI</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Pincode</label>
+                                    <input type="text" class="form-control-clean" formControlName="zip">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="mb-5" style="margin-top: 10px;">
+                            <h4 class="section-title mb-4">
+                                <span class="icon-anim lock-icon me-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </span>
+                                Security
+                            </h4>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label-clean">New Password</label>
+                                    <input type="password" class="form-control-clean" formControlName="password"
+                                        placeholder="Leave blank to keep current">
+                                    <div class="form-text text-danger small mt-1"
+                                        *ngIf="profileForm.get('password')?.errors?.['minlength']">
+                                        Must be at least 6 characters
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 10px;">
+                                    <label class="form-label-clean">Confirm Password</label>
+                                    <input type="password" class="form-control-clean" formControlName="confirmPassword">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end pt-4 border-top mt-5" style="margin-top: 10px;">
+                            <button type="submit" class="btn-save px-5 py-3"
+                                [disabled]="isLoading || profileForm.invalid">
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                                <span *ngIf="!isLoading">Save Changes</span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

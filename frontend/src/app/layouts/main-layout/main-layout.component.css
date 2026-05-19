@@ -1,0 +1,13 @@
+.layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    background-color: var(--bg-color);
+    padding-top: 2rem;
+    /* Spacing from navbar if fixed, or just general spacing */
+    padding-bottom: 2rem;
+}

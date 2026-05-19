@@ -1,0 +1,20 @@
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    /* Slate 100 */
+}
+
+.admin-content {
+    flex: 1;
+    margin-left: 260px;
+    /* Match sidebar width */
+    padding: 2rem;
+    transition: margin-left 0.3s;
+}
+
+@media (max-width: 768px) {
+    .admin-content {
+        margin-left: 0;
+    }
+}

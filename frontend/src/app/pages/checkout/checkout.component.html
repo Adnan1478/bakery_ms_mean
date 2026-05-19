@@ -1,0 +1,156 @@
+<div class="checkout-container fade-in">
+    <div class="checkout-layout">
+        <!-- Left Column: Address & Payment -->
+        <div class="main-content">
+
+            <!-- Address Section -->
+            <div class="section address-section">
+                <div class="section-header">
+                    <h2>Delivering to {{ shippingAddress.name }}</h2>
+                </div>
+                <div class="address-details">
+                    <p>{{ shippingAddress.street }}, {{ shippingAddress.city }}, {{ shippingAddress.state }}, {{
+                        shippingAddress.zip }}, {{ shippingAddress.country }}</p>
+                    <button class="btn-link" (click)="toggleAddressEdit()">Change</button>
+                </div>
+            </div>
+
+            <!-- Address Modal -->
+            <div class="modal-overlay" *ngIf="isEditingAddress" (click)="toggleAddressEdit()">
+                <div class="modal-content" (click)="$event.stopPropagation()">
+                    <div class="modal-header">
+                        <h3>Enter a new delivery address</h3>
+                        <button class="close-btn" (click)="toggleAddressEdit()">×</button>
+                    </div>
+
+                    <div class="address-edit-form">
+                        <div class="amazon-location-link">
+                            <span class="location-icon">📍</span> Or find an BakeDelight collection location near you
+                        </div>
+
+                        <div class="autofill-box">
+                            <div class="autofill-text">Save time. Autofill from your profile.</div>
+                            <button class="btn-secondary small" (click)="autoFill()">Autofill form</button>
+                        </div>
+
+                        <form (ngSubmit)="saveAddress()">
+                            <div class="form-group">
+                                <label>Country/Region</label>
+                                <select class="form-control" [(ngModel)]="newAddress.country" name="country">
+                                    <option value="India">India</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Full name (First and Last name)</label>
+                                <input type="text" class="form-control" [(ngModel)]="newAddress.name" name="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mobile number</label>
+                                <input type="text" class="form-control" [(ngModel)]="newAddress.mobile" name="mobile">
+                                <div class="help-text">May be used to assist delivery</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pincode</label>
+                                <input type="text" class="form-control" placeholder="6 digits [0-9] PIN code"
+                                    [(ngModel)]="newAddress.zip" name="zip">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Flat, House no., Building, Company, Apartment</label>
+                                <input type="text" class="form-control" [(ngModel)]="newAddress.house" name="house">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Area, Street, Sector, Village</label>
+                                <input type="text" class="form-control" [(ngModel)]="newAddress.area" name="area">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" placeholder="E.g. near apollo hospital"
+                                    [(ngModel)]="newAddress.landmark" name="landmark">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label>Town/City</label>
+                                    <input type="text" class="form-control" [(ngModel)]="newAddress.city" name="city">
+                                </div>
+                                <div class="form-group half">
+                                    <label>State</label>
+                                    <select class="form-control" [(ngModel)]="newAddress.state" name="state">
+                                        <option value="">Choose a state</option>
+                                        <option value="GUJARAT">GUJARAT</option>
+                                        <option value="MAHARASHTRA">MAHARASHTRA</option>
+                                        <!-- Add more states if needed -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary-yellow btn-add-address">Use this address</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Method Section -->
+            <div class="section payment-section">
+                <h2>Payment method</h2>
+
+                <div class="payment-section">
+                    <h2>Payment</h2>
+
+                    <button class="btn-primary-yellow" (click)="payNow()" [disabled]="loading">
+                        {{ loading ? 'Processing...' : 'Pay with Razorpay' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Summary Sidebar -->
+        <div class="sidebar">
+            <div class="summary-card">
+                <button class="btn-primary-yellow btn-block" (click)="payNow()" [disabled]="loading">
+                    {{ loading ? 'Processing...' : 'Use this payment method' }}
+                </button>
+
+                <p class="terms-text">
+                    Choose a payment method to continue checking out. You'll still have a chance to review and edit your
+                    order before it's final.
+                </p>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-totals">
+                    <h3>Order Summary</h3>
+                    <div class="row">
+                        <span>Items ({{ itemsCount }}):</span>
+                        <span>₹{{ total | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="row">
+                        <span>Delivery:</span>
+                        <span>₹0.00</span>
+                    </div>
+                    <div class="row">
+                        <span>Total:</span>
+                        <span>₹{{ total | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="row promotion">
+                        <span>Promotion Applied:</span>
+                        <span>-₹0.00</span>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="row total-row">
+                        <span>Order Total:</span>
+                        <span class="total-amount">₹{{ total | number:'1.2-2' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

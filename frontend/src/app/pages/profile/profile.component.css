@@ -1,0 +1,317 @@
+/* Profile Page - Clean Minimalist Design */
+
+.profile-container {
+    background-color: #f3f4f6;
+    min-height: calc(100vh - 64px);
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+}
+
+.profile-content {
+    max-width: 1140px;
+    /* Wider container */
+    margin: 0 auto;
+}
+
+/* Card Styles */
+.card-clean {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-clean:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+/* Profile Image Section */
+.profile-cover {
+    height: 140px;
+    /* Taller cover */
+    background: linear-gradient(120deg, #4f46e5, #818cf8);
+    position: relative;
+}
+
+.profile-avatar-wrapper {
+    margin-top: -70px;
+    /* Half of new avatar size + border */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.profile-avatar {
+    width: 140px;
+    /* Larger avatar */
+    height: 140px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    background-color: #fff;
+}
+
+.profile-upload-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(55px);
+    /* Adjusted for new size */
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    color: #4b5563;
+}
+
+.profile-upload-btn:hover {
+    background: #f9fafb;
+    color: #6366f1;
+}
+
+/* Typography */
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.profile-email {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.role-badge {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+
+/* Form Styles */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Changed from center to left for better icon alignment */
+    /* Added padding */
+    gap: 0.5rem;
+}
+
+/* Icon Animations */
+.icon-anim {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera-icon svg {
+    transition: transform 0.3s;
+}
+
+.profile-upload-btn:hover .camera-icon svg {
+    transform: rotate(15deg) scale(1.1);
+    color: #4f46e5;
+}
+
+.user-icon svg {
+    color: #4f46e5;
+    animation: pulse-slow 3s infinite ease-in-out;
+}
+
+.pin-icon svg {
+    color: #ec4899;
+    /* Pink */
+    animation: bounce-small 2s infinite ease-in-out;
+}
+
+.lock-icon svg {
+    color: #f59e0b;
+    /* Amber */
+    animation: swing-lock 3s infinite ease-in-out;
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes bounce-small {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes swing-lock {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-5deg);
+    }
+}
+
+.form-label-clean {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-control-clean {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: #111827;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-clean:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-control-clean:disabled,
+.form-control-clean[readonly] {
+    background-color: #f9fafb;
+    color: #6b7280;
+}
+
+.btn-save {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    border: none;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+
+.btn-save:hover:not(:disabled) {
+    background-color: #4338ca;
+    box-shadow: 0 6px 8px rgba(79, 70, 229, 0.3);
+}
+
+.btn-save:disabled {
+    background-color: #a5b4fc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* Center profile text content */
+.profile-name,
+.profile-email {
+    text-align: center;
+}
+
+
+
+/* Center "Member Since" section */
+.member-since {
+    text-align: center;
+}
+
+.member-since .label {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.member-since .value {
+    font-weight: 600;
+    color: #111827;
+}
+
+.card-body {
+    text-align: center;
+}
+
+
+/* Animation */
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

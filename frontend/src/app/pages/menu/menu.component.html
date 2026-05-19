@@ -1,0 +1,58 @@
+<div class="menu-page fade-in">
+    <!-- Sidebar / Filter Section -->
+    <aside class="menu-filters">
+        <div class="filter-group">
+            <h3>Search</h3>
+            <input type="text" class="form-input" placeholder="Search for bread, cake..." [(ngModel)]="searchTerm"
+                (input)="onFilterChange()">
+        </div>
+
+        <div class="filter-group">
+            <h3>Categories</h3>
+            <div class="category-list">
+                <button class="cat-btn" [class.active]="selectedCategory === ''"
+                    (click)="selectedCategory = ''; onFilterChange()">
+                    All
+                </button>
+                <button *ngFor="let cat of categories" class="cat-btn" [class.active]="selectedCategory === cat._id"
+                    (click)="selectedCategory = cat._id; onFilterChange()">
+                    {{ cat.name }}
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Product Grid -->
+    <main class="menu-content">
+        <div class="menu-header">
+            <h2>Our Menu</h2>
+            <p>Showing {{ products.length }} results</p>
+        </div>
+
+        <div *ngIf="loading" class="loading-state">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="products-grid" *ngIf="!loading">
+            <div class="product-card card" *ngFor="let product of products">
+                <div class="product-image" [style.backgroundImage]="'url(http://localhost:5000' + product.image + ')'"
+                    [routerLink]="['/products', product._id]" style="cursor: pointer;" title="View Details">
+                    <span class="stock-badge" *ngIf="product.stock < 5 && product.stock > 0">Low Stock</span>
+                    <span class="stock-badge out" *ngIf="product.stock === 0">Out of Stock</span>
+                </div>
+                <div class="product-info">
+                    <span class="category-tag">{{ product.category?.name }}</span>
+                    <h4>{{ product.name }}</h4>
+                    <p class="description">{{ product.description | slice:0:60 }}...</p>
+                    <div class="card-footer">
+                        <span class="price">₹{{ product.price | number:'1.2-2' }}</span>
+                        <button class="btn btn-primary btn-sm" [disabled]="product.stock === 0"
+                            (click)="addToCart(product)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

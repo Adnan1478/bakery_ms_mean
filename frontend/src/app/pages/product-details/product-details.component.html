@@ -1,0 +1,226 @@
+<div class="details-page fade-in rebuild-flag">
+    <div class="container py-4">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs mb-4">
+            <a routerLink="/" class="crumb-link">Home</a>
+            <span class="crumb-sep">›</span>
+            <span class="crumb-link">Cake Delivery</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb-current">{{ product?.name }}</span>
+        </div>
+
+        <div *ngIf="loading" class="loading-state">
+            <div class="spinner"></div>
+        </div>
+
+        <div *ngIf="!loading && product" class="product-details-container">
+            <div class="product-layout">
+                <!-- Left Column: Gallery -->
+                <div class="product-gallery">
+                    <!-- Only show strip if we have more than 1 image -->
+                    <div class="thumb-strip" *ngIf="productImages.length > 1">
+                        <div class="thumb" *ngFor="let img of productImages" [class.active]="selectedImage === img"
+                            (click)="selectImage(img)">
+                            <img [src]="'http://localhost:5000' + img" [alt]="product.name" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="main-image-wrapper">
+                        <img [src]="'http://localhost:5000' + selectedImage" [alt]="product.name" class="main-img"
+                            loading="eager">
+                        <div class="veg-badge">
+                            <div class="veg-icon"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Info -->
+                <div class="product-info-panel">
+                    <h1 class="product-title">{{ product.name }}</h1>
+
+                    <div class="rating-row">
+                        <span class="rating-badge">{{ avgRating > 0 ? avgRating : 'New' }} ★</span>
+                        <span class="review-count">({{ totalReviews }} Reviews)</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span class="current-price">₹{{ currentPrice | number:'1.2-2' }}</span>
+                        <span class="gst-info">(Inclusive of GST)</span>
+                        <button class="wishlist-btn">♡</button>
+                    </div>
+
+                    <p class="description">{{ product.description }}</p>
+
+                    <!-- Weight Selection -->
+                    <div class="option-section">
+                        <div class="section-header">
+                            <span class="label">Select Weight</span>
+                            <a href="#" class="link">Serving Info</a>
+                        </div>
+                        <div class="weight-options">
+                            <button *ngFor="let w of weights" class="weight-btn" [class.active]="selectedWeight === w"
+                                (click)="selectWeight(w)">
+                                {{ w }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cake Message -->
+                    <div class="option-section mt-4">
+                        <div class="section-header">
+                            <span class="label">Cake Message</span>
+                            <span class="counter">{{ cakeMessage.length }}/25</span>
+                        </div>
+                        <input type="text" class="custom-input" placeholder="Write A Sweet Wish" maxlength="25"
+                            [(ngModel)]="cakeMessage">
+                    </div>
+
+                    <!-- Delivery -->
+                    <div class="option-section mt-4">
+                        <div class="section-header">
+                            <span class="label">Delivery Location</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="custom-input" placeholder="Search for area/locality/pincode"
+                                [(ngModel)]="pincode">
+                            <button class="check-btn" (click)="checkAvailability()">Check Availability</button>
+                        </div>
+                        <p class="small-text text-warning mt-1">Available in limited cities*</p>
+                    </div>
+
+                    <div class="sku-info mt-3">
+                        <small>SKU Number: cake0003btr</small>
+                    </div>
+
+                    <!-- Chef's Word -->
+                    <div class="chefs-word-box mt-4">
+                        <div class="chef-header">
+                            <span class="chef-icon">👨‍🍳</span>
+                            <strong>"In Our Chef's Word"</strong>
+                        </div>
+                        <p class="chef-text">
+                            Savoured By All The Age Groups, This Crunchy Chunks Of Butterscotch Mixed With Smooth
+                            Caramel Is What Makes This Cake A Best Seller!
+                        </p>
+                    </div>
+
+                    <!-- View Recipe Button (Only if recipe exists) -->
+                    <div class="mt-4" style="margin-top: 10px;" *ngIf="hasRecipe">
+                        <button class="recipe-btn" [routerLink]="['/recipe', recipe._id]">
+                            <span class="icon">📜</span> View Secret Recipe
+                        </button>
+                    </div>
+
+                    <!-- Recipe Modal -->
+                    <div class="modal-overlay" *ngIf="showRecipeModal" (click)="showRecipeModal = false">
+                        <div class="recipe-card scale-in" (click)="$event.stopPropagation()">
+                            <div class="recipe-header">
+                                <h3>{{ product.name }} Recipe</h3>
+                                <button class="close-btn" (click)="showRecipeModal = false">×</button>
+                            </div>
+                            <div class="recipe-content">
+                                <div class="recipe-section">
+                                    <h4>Ingredients</h4>
+                                    <ul class="ingredient-list">
+                                        <li *ngFor="let ing of recipe.ingredients">{{ ing }}</li>
+                                    </ul>
+                                </div>
+                                <div class="recipe-section">
+                                    <h4>Instructions</h4>
+                                    <div class="instructions-text">
+                                        {{ recipe.instructions }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!-- 
+                    <div class="delivery-time mt-3">
+                        🕗 Earliest Delivery : 2-3 Hrs
+                    </div> -->
+
+                    <!-- Buy Action -->
+                    <div class="action-footer mt-4">
+                        <button class="buy-now-btn" (click)="addToCart()" [disabled]="product.stock <= 0">
+                            {{ product.stock > 0 ? ('Buy Now | ₹' + (currentPrice | number:'1.2-2')) : 'Out of Stock' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Custom Reviews Section ── -->
+        <div *ngIf="!loading && product" class="reviews-section mt-5 fade-in">
+            <h2 class="section-title">Customer Reviews ({{ totalReviews }})</h2>
+
+            <!-- Review write form (Conditional on canReviewStatus) -->
+            <div class="write-review-card mt-4" *ngIf="canReviewStatus">
+                <h4>You bought this! Share your experience</h4>
+                <div class="star-rating-selector mt-2">
+                    <span 
+                      *ngFor="let star of [1,2,3,4,5]" 
+                      (click)="setRating(star)" 
+                      [class.active]="star <= reviewRating"
+                      class="star-icon">★</span>
+                </div>
+                
+                <textarea class="form-control mt-3 custom-textarea" [(ngModel)]="reviewComment" placeholder="Tell us what you loved about this product... (required)" rows="3"></textarea>
+                
+                <div class="mt-3 file-upload-wrapper">
+                    <label class="btn-upload d-inline-block">
+                        <span class="icon">📷</span> Upload a Photo (Optional)
+                        <input type="file" (change)="onReviewImageSelected($event)" accept="image/*" hidden>
+                    </label>
+                    <div *ngIf="imagePreview" class="review-image-preview mt-2">
+                        <img [src]="imagePreview" alt="Upload Preview">
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn-submit-review" (click)="submitReview()" [disabled]="submittingReview || !reviewComment.trim()">
+                        {{ submittingReview ? 'Submitting...' : 'Post Review' }}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review List -->
+            <div class="reviews-list mt-5">
+                <div *ngIf="reviews.length === 0" class="no-reviews text-muted py-4 text-center">
+                    No reviews yet. Be the first to share your thoughts!
+                </div>
+
+                <div class="review-card" *ngFor="let rv of reviews">
+                    <div class="review-header-custom">
+                        <div class="reviewer-info-wrap">
+                            <div class="reviewer-avatar-img">
+                                <img [src]="rv.user?.image ? (rv.user.image.startsWith('http') ? rv.user.image : ('http://localhost:5000' + rv.user.image)) : ('https://ui-avatars.com/api/?name=' + (rv.user?.name || 'User') + '&background=random&color=fff')" alt="avatar">
+                            </div>
+                            <div class="reviewer-details">
+                                <div class="name-row">
+                                    <span class="reviewer-name">{{ rv.user?.name || 'Customer' }}</span>
+                                    <span class="verified-badge">✓ Verified Buyer</span>
+                                </div>
+                                <span class="review-date">{{ rv.createdAt | date:'mediumDate' }}</span>
+                            </div>
+                        </div>
+                        <div class="review-stars-static">
+                            <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= rv.rating">★</span>
+                        </div>
+                    </div>
+                    <div class="review-body">
+                        <p class="review-text">{{ rv.comment }}</p>
+                        <div class="review-photo-wrapper" *ngIf="rv.image">
+                            <!-- Image path assumes rv.image looks like /uploads/review_... -->
+                            <img [src]="'http://localhost:5000' + rv.image" class="review-photo-img" alt="Customer Photo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!loading && !product" class="text-center py-5">
+            <h3>Product not found</h3>
+            <a routerLink="/menu" class="btn btn-primary mt-3">Back to Menu</a>
+        </div>
+    </div>
+</div>

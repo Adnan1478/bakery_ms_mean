@@ -1,0 +1,58 @@
+<div class="contact-page fade-in">
+    <div class="container contact-wrapper">
+        <!-- Info Side -->
+        <div class="contact-info">
+            <h1>Get in Touch</h1>
+            <p class="subtitle">Have a question or want to order a custom cake? We'd love to hear from you.</p>
+
+            <div class="info-item">
+                <div class="icon">📍</div>
+                <div>
+                    <h3>Visit Us</h3>
+                    <p>123 Bakery Street, Foodville, FV 12345</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon">📞</div>
+                <div>
+                    <h3>Call Us</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon">✉️</div>
+                <div>
+                    <h3>Email Us</h3>
+                    <p>hello&#64;bakeryms.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="contact-form-container card">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-input" formControlName="name" placeholder="Your Name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-input" formControlName="email" placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-input" formControlName="message" rows="5"
+                        placeholder="How can we help?"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" [disabled]="contactForm.invalid || loading">
+                    {{ loading ? 'Sending...' : 'Send Message' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

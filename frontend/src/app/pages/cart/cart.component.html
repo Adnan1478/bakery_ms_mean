@@ -1,0 +1,60 @@
+<div class="cart-page fade-in">
+    <div class="container cart-container">
+        <h1>Your Shopping Cart</h1>
+
+        <ng-container *ngIf="cartItems$ | async as items">
+            <div *ngIf="items.length > 0; else emptyCart" class="cart-content">
+                <div class="cart-items">
+                    <div class="cart-item card" *ngFor="let item of items">
+                        <img [src]="'http://localhost:5000' + item.product.image" alt="img" class="item-img">
+                        <div class="item-details">
+                            <h3>{{ item.product.name }}</h3>
+                            <p class="price">₹{{ item.product.price }}</p>
+                        </div>
+                        <div class="item-actions">
+                            <div class="qty-control">
+                                <button (click)="updateQuantity(item.product._id, item.quantity - 1)">-</button>
+                                <span>{{ item.quantity }}</span>
+                                <button (click)="updateQuantity(item.product._id, item.quantity + 1)">+</button>
+                            </div>
+                            <button class="btn-remove" (click)="removeItem(item.product._id)">Remove</button>
+                        </div>
+                        <div class="item-total">
+                            ₹{{ (item.product.price * item.quantity) | number:'1.2-2' }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-summary card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹{{ getTotal(items) | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹{{ getTotal(items) | number:'1.2-2' }}</span>
+                    </div>
+                    <button class="btn btn-primary btn-full checkout-btn" [disabled]="loading"
+                        (click)="checkout(items)">
+                        {{ loading ? 'Processing...' : 'Proceed to Checkout' }}
+                    </button>
+                </div>
+            </div>
+
+            <ng-template #emptyCart>
+                <div class="empty-state">
+                    <div class="icon">🛒</div>
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added any treats yet.</p>
+                    <a routerLink="/menu" class="btn btn-primary">Browse Menu</a>
+                </div>
+            </ng-template>
+        </ng-container>
+    </div>
+</div>

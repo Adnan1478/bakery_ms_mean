@@ -1,0 +1,70 @@
+<div class="dashboard-container fade-in">
+    <div class="header">
+        <h1>Dashboard</h1>
+        <p>Overview of your bakery performance</p>
+    </div>
+
+    <div class="stats-grid" *ngIf="!loading; else loader">
+        <div class="stat-card">
+            <div class="icon bg-indigo">👥</div>
+            <div class="info">
+                <h3>Total Users</h3>
+                <p class="value">{{ stats.totalUsers }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon bg-emerald">🥐</div>
+            <div class="info">
+                <h3>Products</h3>
+                <p class="value">{{ stats.totalProducts }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon bg-amber">📦</div>
+            <div class="info">
+                <h3>Orders</h3>
+                <p class="value">{{ stats.totalOrders }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon bg-rose">💰</div>
+            <div class="info">
+                <h3>Total Revenue</h3>
+                <p class="value">₹{{ stats.totalSales | number:'1.2-2' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #loader>
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading stats...</p>
+        </div>
+    </ng-template>
+
+    <!-- ── Charts Section ── -->
+    <div class="charts-row" *ngIf="!loading">
+
+        <!-- Revenue Line Chart -->
+        <div class="chart-card">
+            <h2>📈 Revenue – Last 7 Days</h2>
+            <div class="canvas-wrap">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Top Products Doughnut Chart -->
+        <div class="chart-card">
+            <h2>🏆 Top 5 Best-Selling Products</h2>
+            <div class="canvas-wrap donut-wrap">
+                <canvas id="topProductsChart"></canvas>
+            </div>
+            <div *ngIf="stats.topProducts?.length === 0" class="no-data">No sales data yet.</div>
+        </div>
+
+    </div>
+
+</div>

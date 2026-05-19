@@ -1,0 +1,148 @@
+<div class="admin-orders fade-in">
+    <div class="header">
+        <h2>Manage Orders</h2>
+        <button class="btn btn-outline btn-sm" (click)="loadOrders()">Refresh</button>
+    </div>
+
+    <div class="table-container card">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td><span class="id-badge">#{{ order._id | slice:-6 }}</span></td>
+                    <td>
+                        <div class="user-info">
+                            <span class="font-medium">{{ order.user?.name || 'Guest' }}</span>
+                            <span class="text-sm text-muted">{{ order.user?.email }}</span>
+                        </div>
+                    </td>
+                    <td>{{ order.createdAt | date:'mediumDate' }}</td>
+                    <td>{{ order.totalAmount | currency:'INR' }}</td>
+                    <td>
+                        <span class="status-badge" [ngClass]="order.status.toLowerCase()">{{ order.status }}</span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon" (click)="viewOrder(order)" title="View Details">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                            <select [ngModel]="order.status" (ngModelChange)="updateStatus(order, $event)"
+                                class="status-select form-input">
+                                <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="orders.length === 0 && !loading">
+                    <td colspan="6" class="text-center p-4">No orders found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal-overlay" *ngIf="showModal" (click)="showModal = false">
+        <div class="modal-content scale-in" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Order Details #{{ selectedOrder?._id | slice:-6 }}</h2>
+                <button class="btn-close" (click)="showModal = false">×</button>
+            </div>
+
+            <div class="modal-body" *ngIf="selectedOrder">
+                <div class="details-grid">
+                    <!-- Customer Section -->
+                    <div class="detail-section">
+                        <h3>Customer Information</h3>
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="label">Name:</span>
+                                <span class="value">{{ selectedOrder.user?.name || 'Guest' }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Email:</span>
+                                <span class="value">{{ selectedOrder.user?.email }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Date:</span>
+                                <span class="value">{{ selectedOrder.createdAt | date:'medium' }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Section -->
+                    <div class="detail-section">
+                        <h3>Shipping Details</h3>
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="label">Street:</span>
+                                <span class="value">{{ selectedOrder.shippingAddress?.street }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">City:</span>
+                                <span class="value">{{ selectedOrder.shippingAddress?.city }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Zip:</span>
+                                <span class="value">{{ selectedOrder.shippingAddress?.zip }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="detail-section">
+                    <h3>Order Items</h3>
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Weight</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of selectedOrder.items">
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.weight || '-' }}</td>
+                                <td>{{ item.price | currency:'INR' }}</td>
+                                <td>x{{ item.quantity }}</td>
+                                <td>{{ (item.price * item.quantity) | currency:'INR' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Summary -->
+                <div class="total-row">
+                    <div class="total-summary">
+                        <div class="summary-row grand-total">
+                            <span>Total Amount:</span>
+                            <span>{{ selectedOrder.totalAmount | currency:'INR' }}</span>
+                        </div>
+                        <div class="summary-row mt-2">
+                            <span>Status:</span>
+                            <span class="status-badge" [ngClass]="selectedOrder.status.toLowerCase()">{{
+                                selectedOrder.status }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

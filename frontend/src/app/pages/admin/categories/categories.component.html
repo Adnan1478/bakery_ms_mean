@@ -1,0 +1,95 @@
+<div class="page-container fade-in">
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Manage Categories</h1>
+            <p class="subtitle">Organize your products into categories</p>
+        </div>
+        <button class="btn btn-primary btn-glow" (click)="openAdd()">
+            <span class="icon">+</span> Add New Category
+        </button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" *ngIf="showForm" (click)="cancelEdit()">
+        <!-- Modal Content -->
+        <div class="modal-content glass-panel scale-in" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>{{ editMode ? 'Edit Category' : 'Add New Category' }}</h2>
+                <button class="btn-close" (click)="cancelEdit()">×</button>
+            </div>
+
+            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="modal-body">
+                <div class="form-grid">
+                    <!-- Left Column: Inputs -->
+                    <div class="form-column">
+                        <div class="form-group floating-label">
+                            <input type="text" id="name" class="form-input" formControlName="name" placeholder=" ">
+                            <label for="name">Category Name</label>
+                        </div>
+
+                        <div class="form-group floating-label">
+                            <textarea id="desc" class="form-input textarea-input" formControlName="description" rows="6"
+                                placeholder=" "></textarea>
+                            <label for="desc">Description</label>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image Upload -->
+                    <div class="form-column image-column" style="margin-left: 10px;">
+                        <label class="static-label">Category Image</label>
+                        <div class="file-drop-zone" [class.dragging]="isDragging" (dragover)="onDragOver($event)"
+                            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" (click)="fileInput.click()">
+
+                            <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
+
+                            <div class="preview-container" *ngIf="imagePreview; else noImage">
+                                <img [src]="imagePreview" alt="Preview" class="image-preview">
+                                <div class="overlay">
+                                    <span>Change Image</span>
+                                </div>
+                            </div>
+
+                            <ng-template #noImage>
+                                <div class="upload-placeholder">
+                                    <span class="upload-icon">☁️</span>
+                                    <p>Drag & Drop or Click to Upload</p>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-text" (click)="cancelEdit()">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-wide" [disabled]="categoryForm.invalid || loading">
+                        <span *ngIf="loading" class="spinner"></span>
+                        {{ editMode ? 'Update Category' : 'Save Category' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="categories-grid" *ngIf="!loading">
+        <div class="category-card card" *ngFor="let cat of categories">
+            <img [src]="'http://localhost:5000' + cat.image" alt="{{ cat.name }}" class="cat-img" *ngIf="cat.image">
+            <div class="cat-info">
+                <h3>{{ cat.name }}</h3>
+                <p>{{ cat.description }}</p>
+                <div class="action-buttons">
+                    <button class="btn-edit" (click)="openEdit(cat)">Edit</button>
+                    <button class="btn-delete" (click)="deleteCategory(cat._id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="categories.length === 0 && !loading" class="empty-state">
+        <div class="empty-icon">📂</div>
+        <h3>No Categories Yet</h3>
+        <p>Create your first category to start organizing products!</p>
+        <button class="btn btn-primary btn-sm" (click)="openAdd()">Add Category</button>
+    </div>
+</div>

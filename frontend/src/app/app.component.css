@@ -1,0 +1,62 @@
+/* Cart Abandonment Toast */
+.cart-toast {
+  position: fixed;
+  bottom: 40px;
+  right: -450px; /* Hidden initially offscreen */
+  width: 380px;
+  background: white;
+  border-left: 6px solid #f5a623;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 16px 20px;
+  z-index: 99999;
+  transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  font-family: 'Inter', sans-serif;
+}
+
+.cart-toast.show {
+  right: 30px;
+}
+
+.toast-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.toast-icon {
+  font-size: 1.8rem;
+  margin-top: -2px;
+  background: rgba(245,166,35,0.15);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.toast-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #adb5bd;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+  margin-top: -2px;
+}
+
+.toast-close:hover {
+  color: #e8622a;
+}

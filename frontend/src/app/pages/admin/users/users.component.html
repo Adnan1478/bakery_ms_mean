@@ -1,0 +1,38 @@
+<div class="users-page fade-in">
+    <div class="header">
+        <h2>Manage Users</h2>
+        <button class="btn btn-outline btn-sm" (click)="loadUsers()">Refresh</button>
+    </div>
+
+    <div class="table-container card">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Member Since</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <select class="form-select role-select" [ngClass]="user.role" [value]="user.role" (change)="updateRole(user, $event)">
+                            <option value="customer">Customer</option>
+                            <option value="staff">Staff</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </td>
+                    <td>{{ user.createdAt | date:'mediumDate' }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="deleteUser(user)"
+                            *ngIf="user.role !== 'admin'">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
