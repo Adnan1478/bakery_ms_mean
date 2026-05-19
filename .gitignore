@@ -1,0 +1,97 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+token.txt
+
+# Node modules
+node_modules/
+npm-debug.log*
+npm-error.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+lerna-debug.log*
+
+# Package manager lock files (optional - uncomment if you want to ignore them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+# Cargo.lock
+
+# Build outputs
+/dist
+/build
+/out-tsc
+/bazel-out
+backend/dist/
+frontend/dist/
+
+# Angular
+.angular/
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+.DS_Store
+Thumbs.db
+
+# File uploads (if sensitive)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# IDE
+*.iml
+.idea/
+out/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compiled files
+*.o
+*.a
+*.so
+*.exe
+
+# Logs
+logs/
+*.log
+
+# System files
+Thumbs.db
+.DS_Store
