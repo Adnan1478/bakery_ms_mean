@@ -119,6 +119,14 @@ Screenshots
 
 Add your project screenshots here:
 
+![Home Page](screenshots/home.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9119a92b-cac1-4dbe-b2d9-f8422d39598a" />
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/02386fca-d04a-4175-95d7-4268d9d9484f" />
+
+![Product Page](screenshots/products.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/632e3580-16af-4c9b-837f-3f2aa953706c" />
 
 Author
 Adnan Mansuri
