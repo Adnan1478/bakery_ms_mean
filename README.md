@@ -136,15 +136,16 @@ http://localhost:4200
 
 ### Home Page
 
-<img width="100%" alt="Home Page" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
+<img width="100%" alt="Home Page" src="https://github.com/user-attachments/assets/11eca81d-07de-45cc-abf7-3edfaf31a7ec" />
+
 
 ### Admin Dashboard
 
-<img width="100%" alt="Admin Dashboard" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
+<img width="100%" alt="Admin Dashboard" src="https://github.com/user-attachments/assets/4bed0099-ba74-41ee-a7d5-ff47688a8ebd" />
 
 ### Product Page
 
-<img width="100%" alt="Product Page" src="PASTE_YOUR_GITHUB_IMAGE_URL_HERE" />
+<img width="100%" alt="Product Page" src="https://github.com/user-attachments/assets/63d02ee8-258a-4b38-9b5c-99a32a807df3" />
 
 ## Author
 
