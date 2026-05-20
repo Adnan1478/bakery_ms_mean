@@ -139,13 +139,26 @@ http://localhost:4200
 <img width="100%" alt="Home Page" src="https://github.com/user-attachments/assets/11eca81d-07de-45cc-abf7-3edfaf31a7ec" />
 
 
+### Product Page
+
+<img width="100%" alt="Product Page" src="https://github.com/user-attachments/assets/63d02ee8-258a-4b38-9b5c-99a32a807df3" />
+
+
+### Cart Page
+<img width="100%" alt="Cart Page" src="https://github.com/user-attachments/assets/c4f3f95b-bfbb-4771-9eb4-0b348a042e66" />
+
+
+### Checkout Page
+<img width="100%" alt="Checkout Page" src="https://github.com/user-attachments/assets/2b791176-55c9-4b38-9fe7-0e0ffc58cead"  />
+
+
 ### Admin Dashboard
 
 <img width="100%" alt="Admin Dashboard" src="https://github.com/user-attachments/assets/4bed0099-ba74-41ee-a7d5-ff47688a8ebd" />
 
-### Product Page
+### Manage Products
+<img width="100%" alt="Manage Products" src="https://github.com/user-attachments/assets/02e3c508-9916-4dc2-b300-937859826e8b" />
 
-<img width="100%" alt="Product Page" src="https://github.com/user-attachments/assets/63d02ee8-258a-4b38-9b5c-99a32a807df3" />
 
 ## Author
 
